@@ -1,17 +1,17 @@
 # 1.Pengimplementasian checklist secara step by step
   
-  1)Membuat direktori baru dengan nama “Covela” dan mengaktifkan virtual environment
-  2)Membuat proyek Django bernama “Covela” dengan perintah startproject
-  3)Membuat aplikasi baru dengan nama main dengan perintah startapp lalu mendaftarkan aplikasi main ke dalam proyek
-  4)Membuat direktori baru bernama templates didalam direktori aplikasi main
-  5)Membuat berkas baru bernama “main.html” untuk menunjukkan tampilan dasar HTML
-  6)Membuat model pada aplikasi main yang memiliki atribut name dengan tipe CharField, price dengan tipe IntegerField, description dengan tipe TextField dan quantity dengan tipe     IntegerField.
-  7)Membuat serta mengaplikasikan migrasi model dengan perintah makemigrations dan migrate
-  8)Menambahkan fungsi “show_main” yang berisi nama aplikasi, nama dan kelas saya untuk dikembalikan ke template HTML 
-  9)Memodifikasi template “main.html” agar dapat menampilkan data yang telah diambil dari model
-  10)Mengonfigurasi Routing URL aplikasi main dengan membuat berkas urls.py didalam direktori main serta menambahkan kode yang diperlukan kedalam “urls.py”
-  11)Mengonfigurasi Routing URL Proyek dengan membuka file “urls.py” yang terletak di direktori proyek “Covela” lalu menambahkan rute URL untuk mengarahkan ke tampilan main
-  12)Melakukan deployment ke PWS
+  - Membuat direktori baru dengan nama “Covela” dan mengaktifkan virtual environment
+  - Membuat proyek Django bernama “Covela” dengan perintah startproject
+  - Membuat aplikasi baru dengan nama main dengan perintah startapp lalu mendaftarkan aplikasi main ke dalam proyek
+  - Membuat direktori baru bernama templates didalam direktori aplikasi main
+  - Membuat berkas baru bernama “main.html” untuk menunjukkan tampilan dasar HTML
+  - Membuat model pada aplikasi main yang memiliki atribut name dengan tipe CharField, price dengan tipe IntegerField, description dengan tipe TextField dan quantity dengan tipe     IntegerField.
+  - Membuat serta mengaplikasikan migrasi model dengan perintah makemigrations dan migrate
+  - Menambahkan fungsi “show_main” yang berisi nama aplikasi, nama dan kelas saya untuk dikembalikan ke template HTML
+  - Memodifikasi template “main.html” agar dapat menampilkan data yang telah diambil dari model
+  - Mengonfigurasi Routing URL aplikasi main dengan membuat berkas urls.py didalam direktori main serta menambahkan kode yang diperlukan kedalam “urls.py”
+  - Mengonfigurasi Routing URL Proyek dengan membuka file “urls.py” yang terletak di direktori proyek “Covela” lalu menambahkan rute URL untuk mengarahkan ke tampilan main
+  - Melakukan deployment ke PWS
 
 
 
