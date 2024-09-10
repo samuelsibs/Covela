@@ -1,4 +1,4 @@
-1.Pengimplementasian checklist secara step by step
+# 1.Pengimplementasian checklist secara step by step
   
   1)Membuat direktori baru dengan nama “Covela” dan mengaktifkan virtual environment
   2)Membuat proyek Django bernama “Covela” dengan perintah startproject
@@ -15,7 +15,7 @@
 
 
 
-2.Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
+# 2.Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
 ![Bagan Tugas 2 PBP](https://github.com/user-attachments/assets/b5cbe845-b142-4fbd-a0e2-485146ca7a27)
 
@@ -23,13 +23,13 @@
 
 
 
-3.Jelaskan fungsi git dalam pengembangan perangkat lunak!
+# 3.Jelaskan fungsi git dalam pengembangan perangkat lunak!
 
 Git adalah control version system yang digunakan dalam pengembangan perangkat lunak untuk melacak perubahan kode, mendukung kolaborasi tim, dan mengelola versi proyek. Fungsinya meliputi pelacakan perubahan, pengelolaan cabang (branching), penyelesaian konflik, serta memungkinkan backup kode dan transparansi dalam pengembangan. 
 
-3. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
+# 4. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
 
 Django dijadikan permulaan pembelajaran pengembangan perangkat lunak karena Django dapat memberikan kemudahan bagi penggunanya karena memiliki dokumentasi yang lengkap dan jelas serta menyediakan struktur proyek yang rapi dan terorganisir. Meskipun mudah digunakan, Django sangatlah scalable.  Hal tersebut karena memungkinkan pengembang untuk memulai dengan proyek kecil dan kemudian berkembang menjadi proyek besar tanpa perlu berpindah ke framework-framework yang lainnya sehingga cocok untuk jangka panjang.
 
-4.Mengapa model pada Django disebut sebagai ORM?
+# 5.Mengapa model pada Django disebut sebagai ORM?
 Model pada Django disebut ORM (Object-Relational Mapping) karena berfungsi sebagai penghubung antara objek Python dan tabel di database. Dengan ORM, pengembang dapat mengelola database menggunakan kode Python tanpa perlu menulis query SQL, sehingga memudahkan manipulasi data
