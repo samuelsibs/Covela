@@ -1,3 +1,6 @@
+# COVELA 
+# Link Project : http://samuel-sebastian-covela.pbp.cs.ui.ac.id/
+
 # 1.Pengimplementasian checklist secara step by step
   
   - Membuat direktori baru dengan nama “Covela” dan mengaktifkan virtual environment
