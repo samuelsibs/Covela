@@ -82,3 +82,45 @@ Jika kita tidak menambahkan csrf_token pada form, aplikasi akan rentan terhadap 
 
 ![Screenshot (1368)](https://github.com/user-attachments/assets/160c5dfd-5522-4f53-b4a7-257cf07f1b13)
 
+
+# TUGAS 4 - README
+
+# 1) Apa perbedaan antara HttpResponseRedirect() dan redirect()?
+HttpResponseRedirect() hanya menerima URL secara manual untuk redirect, sedangkan redirect() lebih fleksibel karena bisa menerima URL, nama view, atau objek model, sehingga lebih mudah digunakan
+
+# 2) Jelaskan cara kerja penghubungan model Product dengan User!
+Penghubungan model Product dengan User di Django dilakukan dengan menggunakan field ForeignKey pada model Product, yang mengacu pada model User dari “django.contrib.auth.models”. Hal ini menciptakan relasi antara produk dan pengguna, di mana setiap produk akan terasosiasi dengan satu pengguna, sedangkan satu pengguna bisa memiliki banyak produk. Dalam implementasinya, ketika pengguna yang sedang login membuat produk baru, field user pada Product diisi dengan request.user, yang mewakili pengguna yang sedang terotorisasi. Untuk menyimpan produk, Django menggunakan 'commit=False' saat menyimpan form agar dapat mengisi field user terlebih dahulu sebelum menyimpan data ke database. Selain itu, ketika menampilkan produk, kita dapat memfilter produk berdasarkan user yang sedang login dengan memanfaatkan query 'Product.objects.filter(user=request.user)'. Dengan cara ini, setiap pengguna hanya akan melihat produk yang mereka buat, memastikan bahwa data yang ditampilkan sesuai dengan kepemilikan pengguna yang sedang terotentikasi.
+
+# 3) Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+Authentication adalah proses untuk memverifikasi identitas pengguna, biasanya melalui pemeriksaan kredensial seperti username dan password. Contohnya, saat pengguna login ke aplikasi, sistem melakukan authentication untuk memastikan bahwa informasi yang dimasukkan benar. Sedangkan Authorization adalah proses yang menentukan hak akses pengguna setelah mereka berhasil diautentikasi, menentukan apa yang dapat dilakukan pengguna dalam sistem, seperti mengakses halaman tertentu atau mengedit data. Dalam implementasinya di Django, saat pengguna login, sistem menggunakan metode “authenticate()” untuk memverifikasi kredensial, dan jika valid, pengguna tersebut akan diautentikasi menggunakan fungsi “login()”. Setelah itu, akses pengguna dapat dibatasi dengan menggunakan decorator seperti “@login_required”, memastikan bahwa hanya pengguna yang terautentikasi yang dapat mengakses view tertentu. 
+
+# 4) Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+Django mengingat pengguna yang telah login dengan menggunakan session dan cookies. Ketika pengguna berhasil login, Django membuat session yang menyimpan informasi seperti ID pengguna, dan mengaitkannya dengan cookie di browser pengguna yang berisi ID session. Ini memungkinkan pengguna untuk tetap login tanpa harus mengisi kredensial setiap kali mereka mengakses aplikasi. Selain itu, cookies juga digunakan untuk menyimpan preferensi pengguna, melacak aktivitas, dan Cookies juga bisa digunakan untuk analitik, membantu pengembang memahami perilaku pengguna di situs mereka. Namun, tidak semua cookies aman digunakan. Cookies dapat menjadi target serangan seperti pencurian session (session hijacking) atau serangan cross-site scripting (XSS). 
+
+# STEP BY STEP !!!
+- Mengimport UserCreationForm dan messages pada berkas views.py 
+- Menambahkan fungsi register ke dalam views.py yang fungsinya untuk menghasilkan formulir registrasi secara otomatis dan menghasilkan akun pengguna ketika data di submit dari form
+- Membuat berkas HTML baru dengan nama “register.html”  dan mengimplementasi kode yang dibutuhkan.
+- import fungsi register yang telah dibuat kedalam urls.py serta tambahkan pathnya ke variable urlpatterns
+- Pada views.py, telah ditambahkan import authenticate,login dan AuthenticationForm yang digunakan untuk melakukan autentikasi dan login
+- Mengimplementasikan fungsi login_user ke views.py yang mempunyai fungsi untuk mengautentikasi pengguna yang ingin login. Lalu, mengimport fungsinya kedalam berkas urls.py dan menambahkan pathnya di variable urlpatterns
+- Membuat berkas HTML baru dengan nama “login.html” di direktori main/templates dan mengimplementasi kode yang dibutuhkan
+- Untuk membuat fungsi Logout, kita mengimport “from django.contrib.auth import logout” ke dalam views.py
+- Untuk melakukan mekanisme logout, kita menambahkan fungsi logout_user di berkas yang sama lalu mengimport fungsi tersebut kedalam urls.py dan menambahkan pathnya
+- Menambahkan tombol Logout pada berkas main.html
+- Untuk merestriksi akses halaman main, maka kita menambahkan import login_required pada views.py
+- Diatas fungsi show_main, tambahkan @login_required(login_url='/login') agar halaman main hanya bisa diakses oleh pengguna yang sudah login.
+- Agar bisa menggunakan data dari cookies, kita menambahkan import HttpResponseRedirect, reverse, dan datetime pada views.py
+- Dalam fungsi login_user, kita akan menambahkan fitur yang menyimpan cookie bernama last_login, yang mencatat waktu terakhir pengguna melakukan login.
+- Di fungsi show_main juga ditambahkan potongan kode 'last_login': request.COOKIES['last_login'] ke dalam variabel context. 
+- Menyesuaikan fungsi logout_user agar ketika pengguna logout, data cookie dapat terhapus.
+- Untuk menampilkan data sesi terakhir login pengguna, maka pada main.html kita menambahkan potongan kode “<h5>Sesi terakhir login: {{ last_login }}</h5>”
+- Langkah terakhir yang dilakukan adalah menghubungkan model Product dengan User. Tambahkan potongan kode berikut “from django.contrib.auth.models import User” pada models.py
+- Pada model Product yang telah dibuat, tambahkan variabel user untuk dapat menghubungkan satu Product entry dengan satu user.
+- Mengubah kode pada fungsi create_product_entry yang ada di views.py, salah satunya dengan menambahkan parameter commit=False untuk mencegah Django menyimpan objek yang dibuat dari form langsung ke database. 
+- Mengubah value dari “product_entries” dan menambahkan ‘name’ di variable context pada fungsi show_main.
+- Dalam mempersiapkan aplikasi web untuk environment production maka kita menambahkan import os pada settings.py yang ada di subdirektori Covela, Kemudian ganti variabel DEBUG dari berkas settings.py
+- Deploy ke PWS!!!
+- Pada web Covela, klik register untuk menambahkan akun ( untuk ketentuan tugas maka perlu dibuat 2 akun). Selanjutnya tambahkan tiga Product pada web tersebut.
+- SELESAII!!!!
+
