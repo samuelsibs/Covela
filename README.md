@@ -159,3 +159,39 @@ Sedangkan,Grid Layout adalah metode tata letak dua dimensi yang memungkinkan pen
 - Untuk styling data produknya, kita membuat file html baru bernama “card_products.html” di direktori main/templates dan implementasi design card produknya sesuai yang diinginkan. Buat juga 2 button untuk mengedit dan menghapus produknya di setiap card product.
 - Untuk mengatur tampilan kalau tidak ada data produk yang diterima, maka dibuat gambar “x-button” sebagai simbol tidak ada data produk yang dapat ditampilkan. Gambar tersebut kita masukkan kedalam folder “image” yang terdapat di direktori static/image
 - Gunakan card_info.html, card_products.html dan x-button.png ke template main.html.
+
+# TUGAS 6 - README
+
+# 1) Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+JavaScript memungkinkan pengembang untuk membuat halaman web yang dinamis dan interaktif tanpa perlu memuat ulang seluruh halaman setiap kali ada perubahan. Hal ini meningkatkan pengalaman pengguna secara signifikan. JavaScript juga memungkinkan pengembangan aplikasi web berbasis client-side yang berinteraksi dengan server, menggunakan API, serta menyediakan fitur seperti validasi input, animasi, manipulasi DOM, dan pengelolaan event secara langsung di browser pengguna.
+
+# 2) Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+Fungsi dari penggunaan await ketika menggunakan fetch() adalah untuk menunggu hingga permintaan HTTP selesai dan hasilnya diterima sebelum melanjutkan eksekusi kode berikutnya. await menandakan bahwa fungsi harus berhenti sementara hingga fetch mendapatkan respons dari server. Jika kita tidak menggunakan await, fungsi tersebut akan melanjutkan eksekusi tanpa menunggu fetch selesai, sehingga kita mungkin mencoba mengakses data yang belum tersedia, yang dapat menyebabkan kesalahan atau perilaku yang tidak diharapkan.
+
+# 3) Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+Penggunaan decorator csrf_exempt pada view yang digunakan untuk AJAX POST bertujuan untuk mengabaikan verifikasi token CSRF (Cross-Site Request Forgery) pada permintaan tertentu. AJAX POST yang tidak disertai token CSRF akan diblokir oleh mekanisme keamanan Django, dan decorator ini memungkinkan kita untuk menghindari hal tersebut dalam situasi di mana token CSRF tidak diperlukan atau sulit dikelola.
+
+# 4) Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+Pembersihan data input pengguna sebaiknya juga dilakukan di backend karena validasi di frontend saja tidak cukup aman. Pengguna yang berniat jahat dapat memanipulasi kode JavaScript di browser mereka atau mengirimkan permintaan langsung ke server, melewati validasi frontend. Oleh karena itu, backend harus melakukan validasi dan pembersihan data untuk memastikan integritas dan keamanan data yang diterima, menghindari potensi serangan seperti SQL injection atau XSS (Cross-Site Scripting).
+
+# STEP BY STEP!
+
+- Menambahkan impor baru pada “views.py” yaitu csrf_exempt dan require_POST
+- Membuat fungsi baru dengan nama “add_product_entry_ajax” lalu mengimpor fungsi tersebut ke urls.py dan menambahkan pathnya
+- Untuk menampilkan data produk dengan fetch() API, maka kita menghapus variable “product_entries” yang terdapat pada views.py dan menggantinya dengan mengubah variable data menjadi “data = Product.objects.filter(user=request.user)” di fungsi show_json dan show_xml
+- Menghapus bagian block conditional “product_entries” untuk menampilkan card_product ketika kosong atau tidak di berkas main.html dan menggantinya menjadi “<div id="product_entry_cards"></div>”
+- Membuat block <script> pada  bagian bawah main.html sebelum endblock content dan membuat fungsi baru bernama “getProductEntries”. Fungsi ini menggunakan fetch() API ke data JSON secara asynchronous yang dimana setelah data di fetch, fungsi then() digunakan untuk melakukan parse pada data JSON menjadi objek JavaScript.
+- Membuat fungsi baru pada block <script> bernama refreshProductEntries yang berfungsi untuk melakukan refresh data moods secara asinkronus.
+- Untuk membuat modal sebagai form untuk menambahkan product maka yang perlu kita lakukan adalah mengimplementasikan kode untuk modal (tailwind) pada aplikasi.
+- Menambahkan fungsi showModal() dan hideModal() agar modal dapat berfungsi
+- Membuat tombol baru dengan nama “Add New Product Entry by AJAX” untuk melakukan penambahan data produk dengan AJAX
+- Untuk menambahkan data produk dengan AJAX, kita membuat fungsi baru pada block <script> di main.html dengan nama addProductEntry
+- Menambahkan sebuah event listener pada form yang ada di modal untuk menjalankan fungsi addProductEntry()
+- Untuk melindungi aplikasi dari XSS, maka ditambahkan strip_tags untuk membersihkan data baru. Pada fungsi add_product_entry_ajax di views.py kita menggunakan strip_tags pada variable name,price,description dan quantity.
+- Menambahkan method clean_name , clean_price , clean_description , dan clean_quantity pada forms.py. Digunakan untuk membersihkan dan memvalidasi data input dari pengguna sebelum disimpan ke dalam database.
+- Agar bisa membersihkan data dengan DOMPurify, kita menambahkan kode : <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script> di block meta pada berkas main.html
+- Pada fungsi refreshProductEntries, ditambahkan kode berikut  : 
+const name = DOMPurify.sanitize(item.fields.name);
+const price = DOMPurify.sanitize(item.fields.price); 
+const description = DOMPurify.sanitize(item.fields.description);
+- Deploy ke pws!!
