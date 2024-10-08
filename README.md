@@ -178,8 +178,8 @@ Pembersihan data input pengguna sebaiknya juga dilakukan di backend karena valid
 
 - Menambahkan impor baru pada “views.py” yaitu csrf_exempt dan require_POST
 - Membuat fungsi baru dengan nama “add_product_entry_ajax” lalu mengimpor fungsi tersebut ke urls.py dan menambahkan pathnya
-- Untuk menampilkan data produk dengan fetch() API, maka kita menghapus variable “product_entries” yang terdapat pada views.py dan menggantinya dengan mengubah variable data menjadi “data = Product.objects.filter(user=request.user)” di fungsi show_json dan show_xml
-- Menghapus bagian block conditional “product_entries” untuk menampilkan card_product ketika kosong atau tidak di berkas main.html dan menggantinya menjadi “<div id="product_entry_cards"></div>”
+- Untuk menampilkan data produk dengan fetch() API, maka kita menghapus variable “product_entries” yang terdapat pada views.py dan menggantinya dengan mengubah variable data menjadi data = Product.objects.filter(user=request.user) di fungsi show_json dan show_xml
+- Menghapus bagian block conditional “product_entries” untuk menampilkan card_product ketika kosong atau tidak di berkas main.html dan menggantinya menjadi <div id="product_entry_cards"></div>
 - Membuat block <script> pada  bagian bawah main.html sebelum endblock content dan membuat fungsi baru bernama “getProductEntries”. Fungsi ini menggunakan fetch() API ke data JSON secara asynchronous yang dimana setelah data di fetch, fungsi then() digunakan untuk melakukan parse pada data JSON menjadi objek JavaScript.
 - Membuat fungsi baru pada block <script> bernama refreshProductEntries yang berfungsi untuk melakukan refresh data moods secara asinkronus.
 - Untuk membuat modal sebagai form untuk menambahkan product maka yang perlu kita lakukan adalah mengimplementasikan kode untuk modal (tailwind) pada aplikasi.
