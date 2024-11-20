@@ -14,6 +14,8 @@ from main.models import Product
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.utils.html import strip_tags
+import json
+from django.http import JsonResponse
 
 @login_required(login_url='/login')
 def show_main(request):
@@ -32,8 +34,8 @@ def create_product_entry(request):
     form = ProductForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
-        mood_entry = form.save(commit=False)
-        mood_entry.user = request.user
+        product_entry = form.save(commit=False)
+        product_entry.user = request.user
         form.save()
         return redirect('main:show_main')
 
@@ -136,3 +138,23 @@ def add_product_entry_ajax(request):
     new_product.save()
 
     return HttpResponse(b"CREATED", status=201)
+
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+        new_product = Product.objects.create(
+            user=request.user,
+            name=data["name"],
+            price=int(data["price"]),
+            description=data["description"],
+            quantity=int(data["quantity"]),
+
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
